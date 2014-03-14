@@ -1,0 +1,40 @@
+[user]
+	email =
+	name =
+[core]
+    repositoryformatversion = 0
+    filemode = false
+    bare = false
+    logallrefupdates = true
+    symlinks = false
+    ignorecase = true
+    hideDotFiles = dotGitOnly
+    editor = vim
+    autocrlf = false
+[alias]
+    st = status
+    br = branch --color
+    ca = commit -a
+    cm = commit -m
+    co = checkout
+    cv = commit -v
+    standup = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --since yesterday --author='Gordon Thomson'
+[color]
+	ui = true
+    status = true
+    diff = true
+    branch = true
+[color "branch"]
+	current = yellow bold
+	local = green bold
+	remote = cyan bold
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
