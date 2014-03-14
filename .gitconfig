@@ -1,6 +1,6 @@
 [user]
-	email =
-	name =
+    email =
+    name =
 [core]
     repositoryformatversion = 0
     filemode = false
@@ -20,21 +20,21 @@
     cv = commit -v
     standup = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cD) %C(bold blue)<%an>%Creset' --since yesterday --author='Gordon Thomson'
 [color]
-	ui = true
+    ui = true
     status = true
     diff = true
     branch = true
-[color "branch"]
-	current = yellow bold
-	local = green bold
-	remote = cyan bold
+    [color "branch"]
+    current = yellow bold
+    local = green bold
+    remote = cyan bold
 [color "diff"]
-	meta = yellow bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
 [color "status"]
-	added = green bold
-	changed = yellow bold
-	untracked = red bold
+    added = green bold
+    changed = yellow bold
+    untracked = red bold
