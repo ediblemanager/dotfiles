@@ -153,11 +153,8 @@ alias vi='vim'
 # Nice way of viewing the total size for folders
 alias folder_size='du -cksh .[!.]* *'
 
-# Check repo name
-alias repo_name="git remote -v 2> /dev/null | head -n1 | awk '{print \$2}' | sed 's/.*\///;s/.*\://;s/\.git//'"
-
-# Create alias for global usage of composer dump-autoload
-alias cda='~/composer.phar dump-autoload -o'
+# Alias for /usr/bin/composer.phar to composer
+alias composer='/usr/bin/composer.phar'
 
 # Clean up everything laravel-based.
 alias clean_up='php artisan dump-autoload && php artisan clear-compiled && composer dumpautoload -o'
