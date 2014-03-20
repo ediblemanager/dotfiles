@@ -201,9 +201,18 @@ alias upgrade='apt-get update && sudo apt-get dist-upgrade'
 # This might seem like a weird one, but for editing migrations in Laravel - godsend!
 alias find_migs='find . -name "*_*_*_*_*_*_*_*"'
 
+# Fix folder perms
+function folder_perms(){
+    find "$@" -type d -exec chmod 2770 {} \;
+}
+
+# Fix file perms
+function file_perms(){
+    find "$@" -type f -exec chmod 660 {} \;
+}
+
 # Find and replace spaces in DIR's and Filenames.
-remove_spaces()
-{
+function remove_spaces(){
 	find "$1" -depth -name "* *" -execdir rename 's/ /_/g' "{}" \;
 }
 
