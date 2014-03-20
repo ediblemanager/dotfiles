@@ -225,6 +225,18 @@ function parse_git_branch {
   echo "["${ref#refs/heads/}"]"
 }
 
+function monitor_laptop() {
+    xrandr --newmode "1440x900_60.00"  106.47  1440 1520 1672 1904  900 901 904 932 > /dev/null 2>&1
+    xrandr --addmode VBOX0 1440x900_60.00
+    xrandr --output VBOX0 --mode 1440x900_60.00
+}
+
+function monitor_work_external() {
+    xrandr --newmode "1920x1200_60.00"  193.16  1920 2048 2256 2592  1200 1201 1204 1242 > dev/null 2>&1
+    xrandr --addmode VBOX0 1920x1200_60.00
+    xrandr --output VBOX0 --mode 1920x1200_60.00
+}
+
 PROMPT_COMMAND=set_bash_prompt
 unset command_not_found_handle
 export EDITOR='vim'
