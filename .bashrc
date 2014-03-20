@@ -163,8 +163,8 @@ alias clean_up='php artisan dump-autoload && php artisan clear-compiled && compo
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# composer alias
-alias composer='~/bin/composer.phar'
+# Check repo name
+alias repo_name="git remote -v 2> /dev/null | head -n1 | awk '{print \$2}' | sed 's/.*\///;s/.*\://;s/\.git//'"
 
 # PHPUnit alias
 alias phpunit='`pwd`/vendor/bin/phpunit'
