@@ -232,9 +232,9 @@ function monitor_laptop() {
 }
 
 function monitor_work_external() {
-    xrandr --newmode "1920x1200_60.00"  193.16  1920 2048 2256 2592  1200 1201 1204 1242 > dev/null 2>&1
-    xrandr --addmode VBOX0 1920x1200_60.00
-    xrandr --output VBOX0 --mode 1920x1200_60.00
+    xrandr --newmode "1920x1180_60.00"  189.89  1920 2048 2256 2592  1180 1181 1184 1221 > /dev/null 2>&1
+    xrandr --addmode VBOX0 1920x1180_60.00
+    xrandr --output VBOX0 --mode 1920x1180_60.00
 }
 
 PROMPT_COMMAND=set_bash_prompt
