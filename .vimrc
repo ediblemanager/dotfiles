@@ -13,6 +13,9 @@ filetype on
 filetype plugin on
 filetype indent on
 
+" Add Pathogen support for management of assets
+execute pathogen#infect()
+
 " Set to auto read when a file is changed from the outside
 set autoread
 
@@ -56,6 +59,7 @@ set hlsearch
 
 " Show matching brackets when text indicator is over them
 set showmatch
+
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
@@ -74,7 +78,7 @@ syntax enable
 
 set t_Co=256
 highlight Normal ctermfg=grey ctermbg=black
-colorscheme void
+colorscheme mustang
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -127,6 +131,11 @@ autocmd BufReadPost *
      \ endif
 " Remember info about open buffers on close
 set viminfo^=%
+
+"Bubble single lines (kicks butt)
+""http://vimcasts.org/episodes/bubbling-text/
+nmap <C-j> ddp
+nmap <C-k> ddkP
 
 """"""""""""""""""""""""""""""
 " => Status line
@@ -204,11 +213,11 @@ map + <C-W>+
 map - <C-W>-
 
 "Add reviewed by tag
-:map <F7> oReviewed-by: Full Name <email address><Esc>
-"Add tested by tag
-:map <F8> oTested-by: Full Name <email address> [Ubuntu 13.10]<Esc>
+:map <F7> oReviewed-by: Gordon Thomson <gt43@st-andrews.ac.uk><Esc>
+"Add tested by tag - 1.8
+:map <F8> oTested-by: Gordon Thomson <gt43@st-andrews.ac.uk> [Ubuntu 13.10]<Esc>
 "Add signed off by tag
-:map <F9> oSigned-off-by: Full Name <email address><Esc>
+:map <F9> oSigned-off-by: Gordon Thomson <gordon@st-andrews.ac.uk><Esc>
 
 "Shortcut to rapidly toggle `set list` which shows hidden chars
 nmap <leader>l :set list!<CR>
@@ -227,7 +236,8 @@ autocmd FileType php set tabstop=4
 autocmd FileType php set shiftwidth=4
 autocmd FileType php set autoindent
 autocmd FileType php set smartindent
-autocmd FileType php inoremap { {<CR>}<up><end><CR>
+" The line below adds closing braces when opening braces are typed, and moves the cursor to the next line (with indent).
+"autocmd FileType php inoremap { {<CR>}<up><end><CR>
 
 "Ruby-specific stuff here
 autocmd BufNewFile,BufRead *.feature,*.story  set filetype=cucumber
@@ -274,5 +284,39 @@ autocmd BufNewFile,BufRead *.asp set ft=aspvbs
 "Abbreviations
 ab US United States
 ab helpers Helpers
-ab hda \Helpers::debugArray(
+ab dh displayHelpers::debugData(
 ab Heleprs Helpers
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Shell Interaction
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
+set title
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Add JS handling functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let javascript_enable_domhtmlcss=1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Add binding for testing
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap ,t :!phpunit<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Add binding for syntax checking
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap ,. :w !php -l<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Powerline Config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+set linespace=0
