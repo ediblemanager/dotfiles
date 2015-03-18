@@ -91,7 +91,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 unset color_prompt force_color_prompt
-export RUBY_HEAP_MIN_SLOTS=800000
+export RUBY_GC_HEAP_INIT_SLOTS=800000
 export RUBY_HEAP_FREE_MIN=100000
 export RUBY_HEAP_SLOTS_INCREMENT=300000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
@@ -149,15 +149,16 @@ alias bashrc='vim ~/.bashrc && source ~/.bashrc'
 
 # Stop accidentally using vi
 alias vi='vim'
+alias cim='vim'
 
 # Nice way of viewing the total size for folders
 alias folder_size='du -cksh .[!.]* *'
 
-# Alias for /usr/bin/composer.phar to composer
-alias composer='/usr/bin/composer.phar'
-
 # Clean up everything laravel-based.
 alias clean_up='php artisan dump-autoload && php artisan clear-compiled && composer dumpautoload -o'
+
+# Alias to: update composer, chmod to allow me access, update the repo
+alias comp_update='sudo composer selfupdate && sudo chown gordon /usr/local/bin/composer && composer update'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -167,7 +168,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias repo_name="git remote -v 2> /dev/null | head -n1 | awk '{print \$2}' | sed 's/.*\///;s/.*\://;s/\.git//'"
 
 # PHPUnit alias
-alias phpunit='`pwd`/vendor/bin/phpunit'
+alias phpunit='`pwd`/vendor/phpunit/phpunit/phpunit'
 
 # PHPUnit alias for logging test results
 alias phpunit_log='phpunit --log-junit log.junit.xml'
@@ -199,20 +200,39 @@ alias external_ip='wget ifconfig.me'
 alias upgrade='apt-get update && sudo apt-get dist-upgrade'
 
 # This might seem like a weird one, but for editing migrations in Laravel - godsend!
+# Regex probably would be better here, but I've not learned that black art properly.
 alias find_migs='find . -name "*_*_*_*_*_*_*_*"'
 
+# Deploy from git
+alias dfg='~/bin/deploy_from_git/deploy_from_git.sh'
+
+# Alias to handle the reloading of the font cache
+alias reload_fonts='sudo fc-cache -f -v'
+
+# Check to see if the system needs reboot
+alias check_reboot='cat /var/run/reboot-required'
+
+function port_owners() {
+    sudo netstat -tulpn
+}
+
+# find all files within folders matching patter, run ls on them
+function find_and_list() {
+    find "$1" -name "$2" -exec ls -l {} \;
+}
+
 # Fix folder perms
-function folder_perms(){
-    find "$@" -type d -exec chmod 2770 {} \;
+function folder_perms() {
+    find "$1" -type d -exec chmod 2755 {} \;
 }
 
 # Fix file perms
-function file_perms(){
-    find "$@" -type f -exec chmod 660 {} \;
+function file_perms() {
+    find "$1" -type f -exec chmod 660 {} \;
 }
 
 # Find and replace spaces in DIR's and Filenames.
-function remove_spaces(){
+function remove_spaces() {
 	find "$1" -depth -name "* *" -execdir rename 's/ /_/g' "{}" \;
 }
 
@@ -225,7 +245,13 @@ function parse_git_branch {
   echo "["${ref#refs/heads/}"]"
 }
 
-function monitor_laptop() {
+function monitor_laptop_large() {
+    xrandr --newmode "1680x1050_60.00"  147.14  1680 1784 1968 2256  1050 1051 1054 1087 > /dev/null 2>&1
+    xrandr --addmode VBOX0 1680x1050_60.00
+    xrandr --output VBOX0 --mode 1680x1050_60.00
+}
+
+function monitor_laptop_retina() {
     xrandr --newmode "1440x900_60.00"  106.47  1440 1520 1672 1904  900 901 904 932 > /dev/null 2>&1
     xrandr --addmode VBOX0 1440x900_60.00
     xrandr --output VBOX0 --mode 1440x900_60.00
@@ -237,7 +263,27 @@ function monitor_work_external() {
     xrandr --output VBOX0 --mode 1920x1180_60.00
 }
 
-PROMPT_COMMAND=set_bash_prompt
+function monitor_home_external() {
+    xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 > /dev/null 2>&1
+    xrandr --addmode VBOX0 1920x1080_60.00
+    xrandr --output VBOX0 --mode 1920x1080_60.00
+}
+
+# Fixes for RVM to work properly: a login shell is needed, so we're hacking here to ensure it works regardless.
+if test -f ~/.rvm/scripts/rvm; then
+    [ "$(type -t rvm)" = "function" ] || source ~/.rvm/scripts/rvm
+fi
+
+function _update_ps1() {
+    export PS1="$(~/bin/powerline-shell.py $? 2> /dev/null)"
+}
+export PROMPT_COMMAND="_update_ps1"
+
+#PROMPT_COMMAND=set_bash_prompt
 unset command_not_found_handle
 export EDITOR='vim'
-export PATH
+export PATH=$PATH:/home/gordon/projects/capod/laravel_sumac/vendor/bin
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
