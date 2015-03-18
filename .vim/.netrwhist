@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/gordon/projects/capod/laravel_sumac/app/tests/controller'
+let g:netrw_dirhist_2='/home/gordon/projects/capod/laravel_sumac/app/controllers/Admin'
+let g:netrw_dirhist_3='/home/gordon/projects/capod/laravel_sumac/app/controllers'
+let g:netrw_dirhist_4='/home/gordon/projects/capod/laravel_sumac/app/tests/controller'
+let g:netrw_dirhist_5='/home/gordon/projects/capod/laravel_sumac/app/tests'
+let g:netrw_dirhist_6='/home/gordon/projects/capod/laravel_sumac/app/tests/controller'
