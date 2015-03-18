@@ -154,6 +154,12 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
+" Set region to British English
+set spelllang=en_gb
+
+" Set spellchecking in git commit messages
+au BufNewFile,BufRead COMMIT_EDITMSG setlocal spell
+
 " Add spellchecking by default
 map <F5> :setlocal spell! spelllang=en_gb<CR>
 
@@ -162,6 +168,7 @@ map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Temporary Files
@@ -280,6 +287,9 @@ au BufRead,BufNewFile *.tpl set filetype=smarty
 
 "ASP formatting
 autocmd BufNewFile,BufRead *.asp set ft=aspvbs
+
+" Blade support
+autocmd BufNewFile,BufRead *.blade.php set ft=blade.html.php
 
 "Abbreviations
 ab US United States
