@@ -305,6 +305,10 @@ ab Heleprs Helpers
 autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
 set title
 
+
+" Add spellchecking by default
+map <F3> :w !php -l<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Add JS handling functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -330,3 +334,8 @@ if !exists('g:airline_symbols')
 endif
 let g:airline_symbols.space = "\ua0"
 set linespace=0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Prompt for sudo when saving privileged files
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
