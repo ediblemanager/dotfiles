@@ -283,7 +283,8 @@ export PROMPT_COMMAND="_update_ps1"
 unset command_not_found_handle
 export EDITOR='vim'
 export PATH=$PATH:/home/gordon/projects/capod/laravel_sumac/vendor/bin
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# Add ~/.local/bin for pip installed user binaries
+export PATH=$PATH:/home/gordon/.local/bin
 
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
