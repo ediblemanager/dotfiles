@@ -222,7 +222,7 @@ map - <C-W>-
 "Add reviewed by tag
 :map <F7> oReviewed-by: Gordon Thomson <gt43@st-andrews.ac.uk><Esc>
 "Add tested by tag - 1.8
-:map <F8> oTested-by: Gordon Thomson <gt43@st-andrews.ac.uk> [Ubuntu 13.10]<Esc>
+:map <F8> oTested-by: Gordon Thomson <gt43@st-andrews.ac.uk> [Ubuntu 14.04]<Esc>
 "Add signed off by tag
 :map <F9> oSigned-off-by: Gordon Thomson <gordon@st-andrews.ac.uk><Esc>
 
